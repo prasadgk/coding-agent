@@ -1,3 +1,30 @@
+Metadata-Version: 2.4
+Name: universal-ai-coding-agent
+Version: 1.0.0
+Summary: Universal AI Coding Agent - Autonomous code development platform
+Home-page: https://github.com/your-org/ai-coding-agent
+Author: AI Coding Agent Team
+Author-email: AI Coding Agent Team <team@ai-coding-agent.com>
+License: MIT
+Project-URL: Homepage, https://github.com/your-org/ai-coding-agent
+Project-URL: Documentation, https://github.com/your-org/ai-coding-agent/docs
+Project-URL: Repository, https://github.com/your-org/ai-coding-agent
+Project-URL: Issues, https://github.com/your-org/ai-coding-agent/issues
+Keywords: ai,coding,automation,claude,anthropic,jira,bitbucket,github
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Code Generators
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Dynamic: author
+Dynamic: home-page
+Dynamic: requires-python
+
 # Universal AI Coding Agent Platform
 
 A comprehensive, cloud-native AI coding agent platform that integrates with multiple project management and version control systems to provide fully autonomous code development workflows.

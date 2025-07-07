@@ -1,0 +1,808 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "Universal AI Coding Agent",
+		"description": "Complete API collection for Universal AI Coding Agent with all endpoints, example payloads, and proper folder organization.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "Health & System",
+			"item": [
+				{
+					"name": "Root Endpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								""
+							]
+						},
+						"description": "Get basic service information and status"
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/health",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Get detailed health status of all components"
+					},
+					"response": []
+				},
+				{
+					"name": "Prometheus Metrics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/metrics",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"metrics"
+							]
+						},
+						"description": "Get Prometheus-compatible metrics"
+					},
+					"response": []
+				}
+			],
+			"description": "Basic system health and status endpoints"
+		},
+		{
+			"name": "Workflows",
+			"item": [
+				{
+					"name": "List All Workflows",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/workflows",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"workflows"
+							]
+						},
+						"description": "Get list of all workflows"
+					},
+					"response": []
+				},
+				{
+					"name": "List Workflows with Pagination",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/workflows?limit=10&offset=0",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"workflows"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Maximum number of workflows to return (1-100)"
+								},
+								{
+									"key": "offset",
+									"value": "0",
+									"description": "Number of workflows to skip"
+								}
+							]
+						},
+						"description": "Get paginated list of workflows"
+					},
+					"response": []
+				},
+				{
+					"name": "List Completed Workflows",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/workflows?status=completed",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"workflows"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "completed",
+									"description": "Filter by workflow status (pending|running|completed|failed|cancelled)"
+								}
+							]
+						},
+						"description": "Get list of completed workflows only"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Workflow Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"workflows",
+								"{{workflow_id}}"
+							]
+						},
+						"description": "Get detailed information about a specific workflow"
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel Workflow",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}/cancel",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"workflows",
+								"{{workflow_id}}",
+								"cancel"
+							]
+						},
+						"description": "Cancel a running workflow"
+					},
+					"response": []
+				}
+			],
+			"description": "Workflow management endpoints"
+		},
+		{
+			"name": "Repositories",
+			"item": [
+				{
+					"name": "List Repositories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/repositories",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"repositories"
+							]
+						},
+						"description": "Get list of active repository clones"
+					},
+					"response": []
+				},
+				{
+					"name": "Cleanup Repositories",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/repositories/cleanup",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"repositories",
+								"cleanup"
+							]
+						},
+						"description": "Trigger repository cleanup"
+					},
+					"response": []
+				},
+				{
+					"name": "Force Cleanup Repositories",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/repositories/cleanup?force=true",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"repositories",
+								"cleanup"
+							],
+							"query": [
+								{
+									"key": "force",
+									"value": "true",
+									"description": "Force cleanup even if repositories are active"
+								}
+							]
+						},
+						"description": "Force cleanup of repositories even if they are active"
+					},
+					"response": []
+				}
+			],
+			"description": "Repository management endpoints"
+		},
+		{
+			"name": "Integrations & Stats",
+			"item": [
+				{
+					"name": "List Integrations",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/integrations",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"integrations"
+							]
+						},
+						"description": "Get list of configured integrations"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Statistics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/v1/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"stats"
+							]
+						},
+						"description": "Get agent statistics and metrics"
+					},
+					"response": []
+				}
+			],
+			"description": "Integration and statistics endpoints"
+		},
+		{
+			"name": "Testing",
+			"item": [
+				{
+					"name": "Trigger Test Workflow - JIRA",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/test/trigger-workflow?ticket_id=TEST-123&platform=jira",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"test",
+								"trigger-workflow"
+							],
+							"query": [
+								{
+									"key": "ticket_id",
+									"value": "TEST-123",
+									"description": "Test ticket ID"
+								},
+								{
+									"key": "platform",
+									"value": "jira",
+									"description": "Platform type (jira|github|azure_devops)"
+								}
+							]
+						},
+						"description": "Trigger a test workflow for JIRA platform (development only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Trigger Test Workflow - GitHub",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/test/trigger-workflow?ticket_id=TEST-456&platform=github",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"test",
+								"trigger-workflow"
+							],
+							"query": [
+								{
+									"key": "ticket_id",
+									"value": "TEST-456",
+									"description": "Test ticket ID"
+								},
+								{
+									"key": "platform",
+									"value": "github",
+									"description": "Platform type (jira|github|azure_devops)"
+								}
+							]
+						},
+						"description": "Trigger a test workflow for GitHub platform (development only)"
+					},
+					"response": []
+				},
+				{
+					"name": "Trigger Test Workflow - Azure DevOps",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/v1/test/trigger-workflow?ticket_id=TEST-789&platform=azure_devops",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"test",
+								"trigger-workflow"
+							],
+							"query": [
+								{
+									"key": "ticket_id",
+									"value": "TEST-789",
+									"description": "Test ticket ID"
+								},
+								{
+									"key": "platform",
+									"value": "azure_devops",
+									"description": "Platform type (jira|github|azure_devops)"
+								}
+							]
+						},
+						"description": "Trigger a test workflow for Azure DevOps platform (development only)"
+					},
+					"response": []
+				}
+			],
+			"description": "Development testing endpoints"
+		},
+		{
+			"name": "Webhooks",
+			"item": [
+				{
+					"name": "JIRA Webhooks",
+					"item": [
+						{
+							"name": "JIRA Issue Assignment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Atlassian-Webhook-Signature",
+										"value": "sha256=your-signature-here",
+										"description": "Optional webhook signature for verification",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"webhookEvent\": \"jira:issue_updated\",\n  \"issue_event_type_name\": \"issue_assigned\",\n  \"issue\": {\n    \"key\": \"PROJ-123\",\n    \"id\": \"12345\",\n    \"self\": \"https://yourcompany.atlassian.net/rest/api/2/issue/12345\",\n    \"fields\": {\n      \"summary\": \"Fix user login bug\",\n      \"description\": \"Users cannot log in with email addresses containing special characters\",\n      \"priority\": {\n        \"name\": \"High\",\n        \"id\": \"2\"\n      },\n      \"assignee\": {\n        \"accountId\": \"ai-agent\",\n        \"emailAddress\": \"ai-agent@company.com\",\n        \"displayName\": \"AI Coding Agent\"\n      },\n      \"reporter\": {\n        \"accountId\": \"user123\",\n        \"emailAddress\": \"user@company.com\",\n        \"displayName\": \"John Doe\"\n      },\n      \"status\": {\n        \"name\": \"In Progress\",\n        \"id\": \"3\"\n      },\n      \"project\": {\n        \"key\": \"PROJ\",\n        \"name\": \"Sample Project\"\n      },\n      \"issuetype\": {\n        \"name\": \"Bug\",\n        \"id\": \"1\"\n      }\n    }\n  },\n  \"user\": {\n    \"accountId\": \"admin123\",\n    \"emailAddress\": \"admin@company.com\",\n    \"displayName\": \"Admin User\"\n  },\n  \"timestamp\": 1702377600000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/webhooks/jira",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"webhooks",
+										"jira"
+									]
+								},
+								"description": "Handle JIRA issue assignment to AI agent"
+							},
+							"response": []
+						},
+						{
+							"name": "JIRA Issue Created",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"webhookEvent\": \"jira:issue_created\",\n  \"issue\": {\n    \"key\": \"PROJ-456\",\n    \"id\": \"67890\",\n    \"fields\": {\n      \"summary\": \"Implement user authentication feature\",\n      \"description\": \"Add OAuth2 authentication support for the application\",\n      \"priority\": {\n        \"name\": \"Medium\",\n        \"id\": \"3\"\n      },\n      \"assignee\": null,\n      \"reporter\": {\n        \"accountId\": \"user456\",\n        \"emailAddress\": \"product@company.com\",\n        \"displayName\": \"Product Manager\"\n      },\n      \"status\": {\n        \"name\": \"To Do\",\n        \"id\": \"1\"\n      },\n      \"project\": {\n        \"key\": \"PROJ\",\n        \"name\": \"Sample Project\"\n      },\n      \"issuetype\": {\n        \"name\": \"Story\",\n        \"id\": \"2\"\n      }\n    }\n  },\n  \"timestamp\": 1702377660000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/webhooks/jira",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"webhooks",
+										"jira"
+									]
+								},
+								"description": "Handle JIRA issue creation event"
+							},
+							"response": []
+						}
+					],
+					"description": "JIRA webhook endpoints"
+				},
+				{
+					"name": "GitHub Webhooks",
+					"item": [
+						{
+							"name": "GitHub Issue Assignment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-GitHub-Event",
+										"value": "issues"
+									},
+									{
+										"key": "X-Hub-Signature-256",
+										"value": "sha256=your-signature-here",
+										"description": "Optional webhook signature for verification",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"action\": \"assigned\",\n  \"issue\": {\n    \"id\": 123456789,\n    \"number\": 42,\n    \"title\": \"Fix authentication bug in login flow\",\n    \"body\": \"Users are experiencing issues when logging in with special characters in their passwords. This needs to be fixed urgently.\",\n    \"state\": \"open\",\n    \"assignee\": {\n      \"login\": \"ai-coding-agent\",\n      \"id\": 987654321,\n      \"avatar_url\": \"https://avatars.githubusercontent.com/u/987654321?v=4\",\n      \"type\": \"User\"\n    },\n    \"assignees\": [\n      {\n        \"login\": \"ai-coding-agent\",\n        \"id\": 987654321,\n        \"avatar_url\": \"https://avatars.githubusercontent.com/u/987654321?v=4\",\n        \"type\": \"User\"\n      }\n    ],\n    \"labels\": [\n      {\n        \"name\": \"bug\",\n        \"color\": \"d73a4a\"\n      },\n      {\n        \"name\": \"priority:high\",\n        \"color\": \"ff0000\"\n      }\n    ],\n    \"created_at\": \"2025-06-12T10:00:00Z\",\n    \"updated_at\": \"2025-06-12T10:05:00Z\"\n  },\n  \"repository\": {\n    \"id\": 123456,\n    \"name\": \"my-awesome-project\",\n    \"full_name\": \"company/my-awesome-project\",\n    \"owner\": {\n      \"login\": \"company\",\n      \"id\": 11111111,\n      \"type\": \"Organization\"\n    },\n    \"private\": true,\n    \"html_url\": \"https://github.com/company/my-awesome-project\",\n    \"clone_url\": \"https://github.com/company/my-awesome-project.git\",\n    \"ssh_url\": \"git@github.com:company/my-awesome-project.git\",\n    \"default_branch\": \"main\",\n    \"language\": \"Python\"\n  },\n  \"sender\": {\n    \"login\": \"project-manager\",\n    \"id\": 22222222,\n    \"type\": \"User\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/webhooks/github",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"webhooks",
+										"github"
+									]
+								},
+								"description": "Handle GitHub issue assignment to AI agent"
+							},
+							"response": []
+						},
+						{
+							"name": "GitHub Issue Comment with Mention",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-GitHub-Event",
+										"value": "issue_comment"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"action\": \"created\",\n  \"issue\": {\n    \"id\": 123456789,\n    \"number\": 42,\n    \"title\": \"Fix authentication bug in login flow\",\n    \"body\": \"Users are experiencing issues when logging in.\",\n    \"state\": \"open\",\n    \"assignee\": {\n      \"login\": \"developer1\",\n      \"id\": 33333333\n    }\n  },\n  \"comment\": {\n    \"id\": 987654321,\n    \"body\": \"@ai-coding-agent please take a look at this authentication issue and provide a fix. The problem seems to be in the password validation logic.\",\n    \"user\": {\n      \"login\": \"team-lead\",\n      \"id\": 44444444,\n      \"type\": \"User\"\n    },\n    \"created_at\": \"2025-06-12T10:15:00Z\",\n    \"updated_at\": \"2025-06-12T10:15:00Z\"\n  },\n  \"repository\": {\n    \"id\": 123456,\n    \"name\": \"my-awesome-project\",\n    \"full_name\": \"company/my-awesome-project\",\n    \"owner\": {\n      \"login\": \"company\",\n      \"id\": 11111111,\n      \"type\": \"Organization\"\n    },\n    \"clone_url\": \"https://github.com/company/my-awesome-project.git\",\n    \"default_branch\": \"main\"\n  },\n  \"sender\": {\n    \"login\": \"team-lead\",\n    \"id\": 44444444,\n    \"type\": \"User\"\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/webhooks/github",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"webhooks",
+										"github"
+									]
+								},
+								"description": "Handle GitHub issue comment mentioning AI agent"
+							},
+							"response": []
+						}
+					],
+					"description": "GitHub webhook endpoints"
+				},
+				{
+					"name": "Bitbucket Webhooks",
+					"item": [
+						{
+							"name": "Bitbucket PR Comment with Mention",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Hub-Signature",
+										"value": "sha256=your-signature-here",
+										"description": "Optional webhook signature for verification",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"eventKey\": \"pullrequest:comment_created\",\n  \"date\": \"2025-06-12T10:20:00+00:00\",\n  \"actor\": {\n    \"name\": \"reviewer1\",\n    \"emailAddress\": \"reviewer@company.com\",\n    \"id\": 12345,\n    \"displayName\": \"Code Reviewer\",\n    \"active\": true,\n    \"slug\": \"reviewer1\",\n    \"type\": \"NORMAL\"\n  },\n  \"pullRequest\": {\n    \"id\": 42,\n    \"version\": 1,\n    \"title\": \"Implement user authentication feature\",\n    \"description\": \"This PR adds OAuth2 authentication support to the application\",\n    \"state\": \"OPEN\",\n    \"open\": true,\n    \"closed\": false,\n    \"createdDate\": 1702377600000,\n    \"updatedDate\": 1702378200000,\n    \"fromRef\": {\n      \"id\": \"refs/heads/feature/oauth-auth\",\n      \"displayId\": \"feature/oauth-auth\",\n      \"latestCommit\": \"abc123def456\",\n      \"repository\": {\n        \"slug\": \"my-project\",\n        \"id\": 123,\n        \"name\": \"my-project\",\n        \"scmId\": \"git\",\n        \"state\": \"AVAILABLE\",\n        \"statusMessage\": \"Available\",\n        \"forkable\": true,\n        \"project\": {\n          \"key\": \"PROJ\",\n          \"id\": 456,\n          \"name\": \"Sample Project\",\n          \"public\": false,\n          \"type\": \"NORMAL\"\n        },\n        \"public\": false\n      }\n    },\n    \"toRef\": {\n      \"id\": \"refs/heads/main\",\n      \"displayId\": \"main\",\n      \"latestCommit\": \"def456abc123\",\n      \"repository\": {\n        \"slug\": \"my-project\",\n        \"id\": 123,\n        \"name\": \"my-project\",\n        \"project\": {\n          \"key\": \"PROJ\",\n          \"name\": \"Sample Project\"\n        }\n      }\n    },\n    \"author\": {\n      \"user\": {\n        \"name\": \"developer1\",\n        \"emailAddress\": \"dev@company.com\",\n        \"displayName\": \"Developer One\"\n      }\n    }\n  },\n  \"comment\": {\n    \"id\": 789,\n    \"version\": 1,\n    \"text\": \"@ai-agent please review this authentication implementation and suggest any improvements or security concerns.\",\n    \"author\": {\n      \"name\": \"reviewer1\",\n      \"emailAddress\": \"reviewer@company.com\",\n      \"displayName\": \"Code Reviewer\"\n    },\n    \"createdDate\": 1702378800000,\n    \"updatedDate\": 1702378800000\n  },\n  \"repository\": {\n    \"slug\": \"my-project\",\n    \"id\": 123,\n    \"name\": \"my-project\",\n    \"scmId\": \"git\",\n    \"state\": \"AVAILABLE\",\n    \"project\": {\n      \"key\": \"PROJ\",\n      \"id\": 456,\n      \"name\": \"Sample Project\",\n      \"type\": \"NORMAL\"\n    },\n    \"public\": false\n  }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/webhooks/bitbucket",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"webhooks",
+										"bitbucket"
+									]
+								},
+								"description": "Handle Bitbucket pull request comment mentioning AI agent"
+							},
+							"response": []
+						},
+						{
+							"name": "Bitbucket Repository Push",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"eventKey\": \"repo:push\",\n  \"date\": \"2025-06-12T10:25:00+00:00\",\n  \"actor\": {\n    \"name\": \"developer2\",\n    \"emailAddress\": \"dev2@company.com\",\n    \"id\": 54321,\n    \"displayName\": \"Developer Two\",\n    \"active\": true,\n    \"slug\": \"developer2\",\n    \"type\": \"NORMAL\"\n  },\n  \"repository\": {\n    \"slug\": \"my-project\",\n    \"id\": 123,\n    \"name\": \"my-project\",\n    \"scmId\": \"git\",\n    \"state\": \"AVAILABLE\",\n    \"statusMessage\": \"Available\",\n    \"forkable\": true,\n    \"project\": {\n      \"key\": \"PROJ\",\n      \"id\": 456,\n      \"name\": \"Sample Project\",\n      \"description\": \"A sample project for demonstration\",\n      \"public\": false,\n      \"type\": \"NORMAL\"\n    },\n    \"public\": false,\n    \"links\": {\n      \"clone\": [\n        {\n          \"href\": \"https://bitbucket.org/company/my-project.git\",\n          \"name\": \"https\"\n        },\n        {\n          \"href\": \"ssh://git@bitbucket.org/company/my-project.git\",\n          \"name\": \"ssh\"\n        }\n      ]\n    }\n  },\n  \"changes\": [\n    {\n      \"ref\": {\n        \"id\": \"refs/heads/feature/new-feature\",\n        \"displayId\": \"feature/new-feature\",\n        \"type\": \"BRANCH\"\n      },\n      \"refId\": \"refs/heads/feature/new-feature\",\n      \"fromHash\": \"abc123def456\",\n      \"toHash\": \"def456ghi789\",\n      \"type\": \"UPDATE\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/webhooks/bitbucket",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"webhooks",
+										"bitbucket"
+									]
+								},
+								"description": "Handle Bitbucket repository push event"
+							},
+							"response": []
+						}
+					],
+					"description": "Bitbucket webhook endpoints"
+				},
+				{
+					"name": "Azure DevOps Webhooks",
+					"item": [
+						{
+							"name": "Azure DevOps Work Item Assignment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"subscriptionId\": \"12345678-1234-1234-1234-123456789012\",\n  \"notificationId\": 987654321,\n  \"id\": \"03c164c2-8912-4d5e-8009-3707d5f83734\",\n  \"eventType\": \"workitem.updated\",\n  \"publisherId\": \"tfs\",\n  \"message\": {\n    \"text\": \"Bug #456 (Fix login authentication issue) assigned to AI Agent\",\n    \"html\": \"<a href=\\\"https://dev.azure.com/company/project/_workitems/edit/456\\\">Bug #456</a> (Fix login authentication issue) assigned to <a href=\\\"https://dev.azure.com/company/_apis/Identities/ai-agent\\\">AI Agent</a>\",\n    \"markdown\": \"[Bug #456](https://dev.azure.com/company/project/_workitems/edit/456) (Fix login authentication issue) assigned to [AI Agent](https://dev.azure.com/company/_apis/Identities/ai-agent)\"\n  },\n  \"detailedMessage\": {\n    \"text\": \"Bug #456 (Fix login authentication issue) assigned to AI Agent\\n\\n- Assigned To: AI Agent\\n- State: Active\\n- Reason: New\",\n    \"html\": \"<a href=\\\"https://dev.azure.com/company/project/_workitems/edit/456\\\">Bug #456</a> (Fix login authentication issue) assigned to <a href=\\\"https://dev.azure.com/company/_apis/Identities/ai-agent\\\">AI Agent</a><ul><li>Assigned To: AI Agent</li><li>State: Active</li><li>Reason: New</li></ul>\",\n    \"markdown\": \"[Bug #456](https://dev.azure.com/company/project/_workitems/edit/456) (Fix login authentication issue) assigned to [AI Agent](https://dev.azure.com/company/_apis/Identities/ai-agent)\\n\\n* Assigned To: AI Agent\\n* State: Active\\n* Reason: New\"\n  },\n  \"resource\": {\n    \"id\": 456,\n    \"workItemId\": 456,\n    \"rev\": 2,\n    \"revisedBy\": {\n      \"displayName\": \"Project Manager\",\n      \"url\": \"https://spsprodcus3.vssps.visualstudio.com/A12345678-1234-1234-1234-123456789012/_apis/Identities/project-manager\",\n      \"_links\": {\n        \"avatar\": {\n          \"href\": \"https://dev.azure.com/company/_apis/GraphProfile/MemberAvatars/project-manager\"\n        }\n      },\n      \"id\": \"project-manager\",\n      \"uniqueName\": \"pm@company.com\",\n      \"imageUrl\": \"https://dev.azure.com/company/_apis/GraphProfile/MemberAvatars/project-manager\",\n      \"descriptor\": \"aad.ProjectManagerDescriptor\"\n    },\n    \"revisedDate\": \"2025-06-12T10:30:00.000Z\",\n    \"fields\": {\n      \"System.AreaPath\": {\n        \"oldValue\": \"Company Project\",\n        \"newValue\": \"Company Project\\\\Authentication\"\n      },\n      \"System.AssignedTo\": {\n        \"oldValue\": null,\n        \"newValue\": {\n          \"displayName\": \"AI Agent\",\n          \"url\": \"https://spsprodcus3.vssps.visualstudio.com/A12345678-1234-1234-1234-123456789012/_apis/Identities/ai-agent\",\n          \"_links\": {\n            \"avatar\": {\n              \"href\": \"https://dev.azure.com/company/_apis/GraphProfile/MemberAvatars/ai-agent\"\n            }\n          },\n          \"id\": \"ai-agent\",\n          \"uniqueName\": \"ai-agent@company.com\",\n          \"imageUrl\": \"https://dev.azure.com/company/_apis/GraphProfile/MemberAvatars/ai-agent\",\n          \"descriptor\": \"aad.AIAgentDescriptor\"\n        }\n      },\n      \"System.ChangedDate\": {\n        \"oldValue\": \"2025-06-12T10:00:00.000Z\",\n        \"newValue\": \"2025-06-12T10:30:00.000Z\"\n      },\n      \"System.State\": {\n        \"oldValue\": \"New\",\n        \"newValue\": \"Active\"\n      },\n      \"System.Reason\": {\n        \"oldValue\": \"New\",\n        \"newValue\": \"Investigation\"\n      },\n      \"System.Title\": \"Fix login authentication issue\",\n      \"System.WorkItemType\": \"Bug\",\n      \"System.Description\": \"Users are experiencing authentication failures when logging in with special characters in their passwords. This is blocking multiple user workflows.\",\n      \"Microsoft.VSTS.Common.Priority\": 1,\n      \"Microsoft.VSTS.Common.Severity\": \"2 - High\",\n      \"System.Tags\": \"authentication; security; high-priority\"\n    },\n    \"_links\": {\n      \"self\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItems/456\"\n      },\n      \"workItemUpdates\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItems/456/updates\"\n      },\n      \"workItemRevisions\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItems/456/revisions\"\n      },\n      \"workItemComments\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItems/456/comments\"\n      },\n      \"html\": {\n        \"href\": \"https://dev.azure.com/company/project/_workitems/edit/456\"\n      },\n      \"workItemType\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItemTypes/Bug\"\n      },\n      \"fields\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/fields\"\n      }\n    },\n    \"url\": \"https://dev.azure.com/company/project/_apis/wit/workItems/456\"\n  },\n  \"resourceVersion\": \"1.0\",\n  \"resourceContainers\": {\n    \"collection\": {\n      \"id\": \"12345678-1234-1234-1234-123456789012\",\n      \"baseUrl\": \"https://dev.azure.com/company/\"\n    },\n    \"account\": {\n      \"id\": \"87654321-4321-4321-4321-210987654321\",\n      \"baseUrl\": \"https://dev.azure.com/company/\"\n    },\n    \"project\": {\n      \"id\": \"abcdef12-3456-7890-abcd-ef1234567890\",\n      \"baseUrl\": \"https://dev.azure.com/company/\"\n    }\n  },\n  \"createdDate\": \"2025-06-12T10:30:05.000Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/webhooks/azure-devops",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"webhooks",
+										"azure-devops"
+									]
+								},
+								"description": "Handle Azure DevOps work item assignment to AI agent"
+							},
+							"response": []
+						},
+						{
+							"name": "Azure DevOps Work Item Created",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"subscriptionId\": \"12345678-1234-1234-1234-123456789012\",\n  \"notificationId\": 987654322,\n  \"id\": \"04c164c2-8912-4d5e-8009-3707d5f83735\",\n  \"eventType\": \"workitem.created\",\n  \"publisherId\": \"tfs\",\n  \"message\": {\n    \"text\": \"User Story #789 (Implement OAuth2 authentication) created by Product Owner\",\n    \"html\": \"<a href=\\\"https://dev.azure.com/company/project/_workitems/edit/789\\\">User Story #789</a> (Implement OAuth2 authentication) created by <a href=\\\"https://dev.azure.com/company/_apis/Identities/product-owner\\\">Product Owner</a>\",\n    \"markdown\": \"[User Story #789](https://dev.azure.com/company/project/_workitems/edit/789) (Implement OAuth2 authentication) created by [Product Owner](https://dev.azure.com/company/_apis/Identities/product-owner)\"\n  },\n  \"resource\": {\n    \"id\": 789,\n    \"workItemId\": 789,\n    \"rev\": 1,\n    \"fields\": {\n      \"System.AreaPath\": \"Company Project\\\\Authentication\",\n      \"System.TeamProject\": \"Company Project\",\n      \"System.IterationPath\": \"Company Project\\\\Sprint 25\",\n      \"System.WorkItemType\": \"User Story\",\n      \"System.State\": \"New\",\n      \"System.Reason\": \"New\",\n      \"System.CreatedDate\": \"2025-06-12T10:35:00.000Z\",\n      \"System.CreatedBy\": {\n        \"displayName\": \"Product Owner\",\n        \"uniqueName\": \"po@company.com\",\n        \"id\": \"product-owner\"\n      },\n      \"System.ChangedDate\": \"2025-06-12T10:35:00.000Z\",\n      \"System.ChangedBy\": {\n        \"displayName\": \"Product Owner\",\n        \"uniqueName\": \"po@company.com\",\n        \"id\": \"product-owner\"\n      },\n      \"System.Title\": \"Implement OAuth2 authentication\",\n      \"System.Description\": \"<div>As a user, I want to be able to log in using OAuth2 providers (Google, Microsoft, GitHub) so that I can access the application without creating a separate account.</div><div><br></div><div><b>Acceptance Criteria:</b></div><div>1. Support Google OAuth2 login</div><div>2. Support Microsoft OAuth2 login</div><div>3. Support GitHub OAuth2 login</div><div>4. Existing user accounts should be preserved</div><div>5. OAuth2 accounts should be linkable to existing accounts</div>\",\n      \"Microsoft.VSTS.Common.StateChangeDate\": \"2025-06-12T10:35:00.000Z\",\n      \"Microsoft.VSTS.Common.Priority\": 2,\n      \"Microsoft.VSTS.Common.ValueArea\": \"Business\",\n      \"Microsoft.VSTS.Scheduling.StoryPoints\": 8,\n      \"System.Tags\": \"authentication; oauth2; user-experience\"\n    },\n    \"_links\": {\n      \"self\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItems/789\"\n      },\n      \"workItemUpdates\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItems/789/updates\"\n      },\n      \"workItemRevisions\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItems/789/revisions\"\n      },\n      \"workItemComments\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItems/789/comments\"\n      },\n      \"html\": {\n        \"href\": \"https://dev.azure.com/company/project/_workitems/edit/789\"\n      },\n      \"workItemType\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/workItemTypes/User%20Story\"\n      },\n      \"fields\": {\n        \"href\": \"https://dev.azure.com/company/project/_apis/wit/fields\"\n      }\n    },\n    \"url\": \"https://dev.azure.com/company/project/_apis/wit/workItems/789\"\n  },\n  \"resourceVersion\": \"1.0\",\n  \"resourceContainers\": {\n    \"collection\": {\n      \"id\": \"12345678-1234-1234-1234-123456789012\",\n      \"baseUrl\": \"https://dev.azure.com/company/\"\n    },\n    \"account\": {\n      \"id\": \"87654321-4321-4321-4321-210987654321\",\n      \"baseUrl\": \"https://dev.azure.com/company/\"\n    },\n    \"project\": {\n      \"id\": \"abcdef12-3456-7890-abcd-ef1234567890\",\n      \"baseUrl\": \"https://dev.azure.com/company/\"\n    }\n  },\n  \"createdDate\": \"2025-06-12T10:35:05.000Z\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/webhooks/azure-devops",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"webhooks",
+										"azure-devops"
+									]
+								},
+								"description": "Handle Azure DevOps work item creation event"
+							},
+							"response": []
+						}
+					],
+					"description": "Azure DevOps webhook endpoints"
+				}
+			],
+			"description": "Webhook endpoints for external service integrations"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "workflow_id",
+			"value": "workflow-123",
+			"type": "string",
+			"description": "Example workflow ID for testing"
+		}
+	]
+}

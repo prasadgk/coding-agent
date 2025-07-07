@@ -1,0 +1,116 @@
+# Example configuration for Claude Code integration
+# This file demonstrates how to configure the AI Coding Agent with Claude Code
+
+# Agent configuration
+agent:
+  workspace_path: "/tmp/ai-agent-workspace"
+  max_concurrent_workflows: 5
+  repo_cleanup_interval: 24
+  max_repositories: 20
+
+# Claude Code specific settings
+claude_code:
+  # Claude Code CLI command (default: "claude")
+  claude_command: "claude"
+  
+  # Model to use for code generation
+  model: "claude-3-opus-20240229"
+  
+  # Maximum tokens for generation
+  max_tokens: 4096
+  
+  # Temperature for generation (0.0 = deterministic, 1.0 = creative)
+  temperature: 0.3
+  
+  # Optional custom system prompt
+  system_prompt: |
+    You are an expert software engineer working on implementing features based on ticket requirements.
+    Follow all existing code patterns and best practices in the repository.
+    Write clean, maintainable, and well-tested code.
+
+# Repository management settings
+repository_management:
+  base_workspace: "/tmp/ai-agent-repos"
+  max_concurrent_repos: 20
+  cleanup_interval_hours: 6
+  max_branches_per_repo: 10
+  disk_space_limit_gb: 100
+  enable_repository_caching: true
+  
+  retention_policy:
+    max_inactive_hours: 48
+    max_total_repositories: 50
+    cleanup_on_startup: true
+
+# Integration configurations
+integrations:
+  project_management:
+    jira:
+      enabled: true
+      server_url: "https://yourcompany.atlassian.net"
+      username: "${JIRA_USERNAME}"
+      api_token: "${JIRA_API_TOKEN}"
+      webhook_path: "/webhooks/jira"
+      
+    azure_devops:
+      enabled: false
+      organization: "yourorg"
+      project: "yourproject"
+      personal_access_token: "${AZURE_PAT}"
+      
+  version_control:
+    bitbucket:
+      enabled: true
+      workspace: "yourworkspace"
+      username: "${BITBUCKET_USERNAME}"
+      app_password: "${BITBUCKET_APP_PASSWORD}"
+      
+    github:
+      enabled: true
+      personal_access_token: "${GITHUB_TOKEN}"
+      organization: "yourorg"
+
+# Workflow settings
+workflow:
+  max_retries: 3
+  retry_backoff_seconds: 60
+  workflow_timeout_minutes: 30
+  concurrent_workflows: 5
+  enable_auto_recovery: true
+
+# Testing configuration
+testing:
+  # Automatically run tests after code generation
+  auto_run_tests: true
+  
+  # Test timeout in seconds
+  test_timeout: 600
+  
+  # Generate tests for code without existing tests
+  auto_generate_tests: true
+  
+  # Minimum test coverage percentage required
+  min_coverage_percentage: 80
+
+# Code quality settings
+code_quality:
+  # Enable automatic code formatting
+  auto_format: true
+  
+  # Enable linting
+  enable_linting: true
+  
+  # Enable security scanning
+  enable_security_scan: true
+  
+  # Maximum allowed cyclomatic complexity
+  max_complexity: 10
+
+# Environment variables required:
+# - ANTHROPIC_API_KEY: Your Anthropic API key for Claude Code
+# - JIRA_USERNAME: JIRA username
+# - JIRA_API_TOKEN: JIRA API token
+# - BITBUCKET_USERNAME: Bitbucket username
+# - BITBUCKET_APP_PASSWORD: Bitbucket app password
+# - GITHUB_TOKEN: GitHub personal access token (if using GitHub)
+# - AZURE_PAT: Azure DevOps personal access token (if using Azure DevOps)

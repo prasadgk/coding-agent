@@ -1,0 +1,103 @@
+# Example configuration file for the Universal AI Coding Agent
+
+# Application settings
+app:
+  name: universal-ai-coding-agent
+  environment: development
+  version: 0.1.0
+
+# Repository management configuration
+repository:
+  base_workspace: /tmp/ai-agent-repos
+  max_concurrent_repos: 20
+  cleanup_interval_hours: 24
+  max_branches_per_repo: 10
+  disk_space_limit_gb: 100
+  enable_repository_caching: true
+  repository_lock_timeout: 300
+
+# Workflow configuration
+workflow:
+  max_retries: 3
+  retry_backoff_seconds: 60
+  workflow_timeout_minutes: 30
+  concurrent_workflows: 10
+  enable_auto_recovery: true
+
+# Monitoring configuration
+monitoring:
+  enable_metrics: true
+  enable_tracing: true
+  log_level: INFO
+  structured_logging: true
+  correlation_id_header: X-Correlation-ID
+  metrics_port: 9090
+  health_check_port: 8080
+
+# Enabled integrations
+integrations:
+  project_management:
+    - jira
+    - azure_devops
+  version_control:
+    - bitbucket
+    - github
+  communication:
+    - slack
+  cicd:
+    - jenkins
+
+# Integration-specific configurations
+jira:
+  enabled: true
+  server_url: ${JIRA_SERVER_URL}
+  username: ${JIRA_USERNAME}
+  api_token: ${JIRA_API_TOKEN}
+  webhook_path: /webhooks/jira
+  issue_types:
+    - Story
+    - Task
+    - Bug
+  custom_fields:
+    story_points: customfield_10001
+    epic_link: customfield_10002
+
+bitbucket:
+  enabled: true
+  workspace: ${BITBUCKET_WORKSPACE}
+  username: ${BITBUCKET_USERNAME}
+  app_password: ${BITBUCKET_APP_PASSWORD}
+  webhook_path: /webhooks/bitbucket
+  default_branch: main
+  branch_prefix: feature/
+  require_pr_approval: true
+
+slack:
+  enabled: false
+  bot_token: ${SLACK_BOT_TOKEN}
+  app_token: ${SLACK_APP_TOKEN}
+  default_channel: ${SLACK_DEFAULT_CHANNEL}
+  webhook_path: /webhooks/slack
+  mention_users: true
+  thread_notifications: true
+
+# Claude Code configuration
+claude:
+  api_key: ${CLAUDE_API_KEY}
+  model: claude-3-opus-20240229
+  max_tokens: 4096
+  temperature: 0.0
+
+# AWS configuration
+aws:
+  region: ${AWS_REGION}
+  secrets_manager_prefix: ai-coding-agent
+  ecs:
+    cluster_name: ${ECS_CLUSTER_NAME}
+    task_definition: ai-coding-agent-task
+    service_name: ai-coding-agent-service
+  vpc:
+    id: ${VPC_ID}
+    subnets:
+      - subnet-xxxxxxxxx
+      - subnet-yyyyyyyyy

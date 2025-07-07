@@ -1,0 +1,112 @@
+version: '3.8'
+
+services:
+  # Main application service
+  ai-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: universal-ai-coding-agent:latest
+    container_name: ai-coding-agent
+    ports:
+      - "8000:8000"
+    environment:
+      # Application settings
+      - ENVIRONMENT=development
+      - LOG_LEVEL=INFO
+      
+      # API Configuration
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      
+      # Claude/Anthropic Configuration
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      
+      # Integration Configuration (optional)
+      - JIRA_BASE_URL=${JIRA_BASE_URL:-}
+      - JIRA_USERNAME=${JIRA_USERNAME:-}
+      - JIRA_API_TOKEN=${JIRA_API_TOKEN:-}
+      
+      - GITHUB_TOKEN=${GITHUB_TOKEN:-}
+      - GITHUB_API_URL=${GITHUB_API_URL:-https://api.github.com}
+      
+      - BITBUCKET_BASE_URL=${BITBUCKET_BASE_URL:-}
+      - BITBUCKET_USERNAME=${BITBUCKET_USERNAME:-}
+      - BITBUCKET_APP_PASSWORD=${BITBUCKET_APP_PASSWORD:-}
+      
+      # Repository Management
+      - REPOSITORY_BASE_PATH=/app/data/repositories
+      - MAX_REPOSITORY_AGE_HOURS=24
+      - CLEANUP_INTERVAL_HOURS=1
+      
+      # Redis connection for caching (if using external Redis)
+      - REDIS_URL=redis://redis:6379/0
+      
+    volumes:
+      # Mount local config if needed
+      - ./examples/config.yaml:/app/config.yaml:ro
+      
+      # Persist repository data
+      - ai-agent-data:/app/data
+      
+      # Logs volume
+      - ai-agent-logs:/app/logs
+      
+    depends_on:
+      - redis
+    networks:
+      - ai-agent-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Redis service for caching and rate limiting
+  redis:
+    image: redis:7-alpine
+    container_name: ai-agent-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - ai-agent-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Development database (optional - for future use)
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: ai-agent-postgres
+  #   environment:
+  #     - POSTGRES_DB=ai_agent
+  #     - POSTGRES_USER=ai_agent
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres-data:/var/lib/postgresql/data
+  #   networks:
+  #     - ai-agent-network
+  #   restart: unless-stopped
+
+volumes:
+  ai-agent-data:
+    driver: local
+  ai-agent-logs:
+    driver: local
+  redis-data:
+    driver: local
+  # postgres-data:
+  #   driver: local
+
+networks:
+  ai-agent-network:
+    driver: bridge

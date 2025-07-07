@@ -1,0 +1,55 @@
+{
+  "webhookEvent": "jira:issue_updated",
+  "issue_event_type_name": "issue_assigned",
+  "timestamp": 1700000000000,
+  "user": {
+    "accountId": "557058:f58131cb-b67d-43c7-b30d-6b58d40bd077",
+    "displayName": "John Doe",
+    "emailAddress": "john.doe@company.com"
+  },
+  "issue": {
+    "id": "10001",
+    "key": "TEST-123",
+    "fields": {
+      "summary": "Implement user authentication feature",
+      "description": "As a user, I want to be able to log in to the application using my email and password.\n\nImplementation requirements:\n- Create login form with email and password fields\n- Implement JWT-based authentication\n- Add password reset functionality\n- Include proper error handling and validation",
+      "assignee": {
+        "accountId": "ai-agent",
+        "displayName": "AI Coding Agent",
+        "emailAddress": "ai-agent@company.com"
+      },
+      "status": {
+        "name": "To Do",
+        "id": "10000"
+      },
+      "priority": {
+        "name": "High",
+        "id": "1"
+      },
+      "project": {
+        "id": "10000",
+        "key": "TEST",
+        "name": "Test Project"
+      },
+      "issuetype": {
+        "name": "Story",
+        "id": "10001"
+      },
+      "labels": ["backend", "authentication", "feature"],
+      "customfield_10001": "https://bitbucket.org/workspace/test-repo"
+    }
+  },
+  "changelog": {
+    "id": "10234",
+    "items": [
+      {
+        "field": "assignee",
+        "fieldtype": "jira",
+        "from": null,
+        "fromString": null,
+        "to": "ai-agent",
+        "toString": "AI Coding Agent"
+      }
+    ]
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "eventKey": "pullrequest:comment_created",
+  "date": "2024-01-15T10:30:00.000Z",
+  "actor": {
+    "type": "user",
+    "username": "johndoe",
+    "displayName": "John Doe",
+    "uuid": "{504c3b62-8120-4f0c-a7bc-87800b9d6f70}"
+  },
+  "pullRequest": {
+    "id": 42,
+    "title": "TEST-123: Implement user authentication",
+    "description": "Implementation of user authentication feature",
+    "state": "OPEN",
+    "createdOn": "2024-01-15T09:00:00.000Z",
+    "updatedOn": "2024-01-15T10:30:00.000Z",
+    "source": {
+      "branch": {
+        "name": "feature/TEST-123"
+      },
+      "commit": {
+        "hash": "abc123def456"
+      },
+      "repository": {
+        "slug": "test-repo",
+        "name": "Test Repository",
+        "fullName": "workspace/test-repo"
+      }
+    },
+    "destination": {
+      "branch": {
+        "name": "main"
+      },
+      "commit": {
+        "hash": "def456ghi789"
+      }
+    },
+    "author": {
+      "username": "ai-agent",
+      "displayName": "AI Coding Agent",
+      "uuid": "{ai-agent-uuid}"
+    },
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/workspace/test-repo/pullrequests/42"
+      },
+      "html": {
+        "href": "https://bitbucket.org/workspace/test-repo/pull-requests/42"
+      }
+    }
+  },
+  "comment": {
+    "id": 123,
+    "content": {
+      "raw": "@ai-agent Please add unit tests for the authentication module"
+    },
+    "createdOn": "2024-01-15T10:30:00.000Z",
+    "user": {
+      "username": "johndoe",
+      "displayName": "John Doe"
+    }
+  },
+  "repository": {
+    "type": "repository",
+    "name": "Test Repository",
+    "fullName": "workspace/test-repo",
+    "uuid": "{repo-uuid}",
+    "links": {
+      "self": {
+        "href": "https://api.bitbucket.org/2.0/repositories/workspace/test-repo"
+      },
+      "html": {
+        "href": "https://bitbucket.org/workspace/test-repo"
+      },
+      "clone": [
+        {
+          "name": "https",
+          "href": "https://bitbucket.org/workspace/test-repo.git"
+        },
+        {
+          "name": "ssh",
+          "href": "git@bitbucket.org:workspace/test-repo.git"
+        }
+      ]
+    }
+  }
+}
